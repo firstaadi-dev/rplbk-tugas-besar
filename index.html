@@ -63,14 +63,43 @@
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+            const childID = prediction[i].className
+            labelContainer.childNodes[i].id = childID  
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
     }
     function pause(){
         isRunning = false;
+        showArticle()
     }
     function resume(){
         isRunning = true;
         loop()
     }
+    async function showArticle(){
+        let bahagiaValue = document.getElementById("Bahagia").innerHTML
+        let marahValue = document.getElementById("Marah").innerHTML
+        let netralValue = document.getElementById("Netral").innerHTML
+        let sedihValue = document.getElementById("Sedih").innerHTML
+        let takutValue = document.getElementById("Takut").innerHTML
+        let article = document.getElementById("article-container")
+        bahagiaValue = parseFloat(bahagiaValue.replace("Bahagia: ", ""))
+        marahValue = parseFloat(marahValue.replace("Marah: ", ""))
+        netralValue = parseFloat(netralValue.replace("Netral: ", ""))
+        sedihValue = parseFloat(sedihValue.replace("Sedih: ", ""))
+        takutValue = parseFloat(takutValue.replace("Takut: ", ""))
+        console.log(bahagiaValue, marahValue, netralValue, sedihValue, takutValue)
+        if (bahagiaValue > marahValue && bahagiaValue > netralValue && bahagiaValue > sedihValue && bahagiaValue > takutValue) {
+            article.innerText = `Bahagia` //Nanti diganti artikel
+        }else if (marahValue > bahagiaValue && marahValue > netralValue && marahValue > sedihValue && marahValue > takutValue){
+            article.innerText = `Marah` //Nanti diganti artikel
+        }else if (netralValue > bahagiaValue && netralValue > marahValue && netralValue > sedihValue && netralValue > takutValue){
+            article.innerText = `Netral` //Nanti diganti artikel
+        }else if (sedihValue > bahagiaValue && sedihValue > marahValue && sedihValue > netralValue && sedihValue > takutValue) {
+            article.innerText = `Sedih` //Nanti diganti artikel
+        }else if (takutValue > bahagiaValue && takutValue > marahValue && takutValue > netralValue && takutValue > sedihValue) {
+            article.innerText = `Takut` //Nanti diganti artikel
+        }
+    }
+    
 </script>
